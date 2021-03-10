@@ -1,0 +1,17 @@
+#main {
+  text-transform: uppercase;
+  padding-top: 25vh;
+}
+
+p {
+  margin-bottom: 0.5em;
+}
+
+#description{
+  font-size: x-large;
+}
+
+body{
+  color: white;
+  background-color: black;
+}
