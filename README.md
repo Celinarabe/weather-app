@@ -1,4 +1,4 @@
 # weather-app
-The Odin Project - Working with APIs
+The Odin Project - Working with APIs  
 Live Demo: https://celinarabe.github.io/weather-app/
 
