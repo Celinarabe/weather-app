@@ -17,14 +17,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  
+
+
+    <nav class="mt-3 navbar navbar-expand-lg">
+      <form id="frm1" class="ml-auto pr-3">
+      <div class="row align-items-start">
+        <div class="col">
+          <input id="searchBox"class="form-control mr-sm-2" type="text" placeholder="Search city" aria-label="Search">
+          <div class="invalid-feedback">City not found</div>
+        </div>
+        <button type="submit" id="searchBtn" class="btn btn-outline-info my-2 my-sm-0 search">Search</button>
+      </form>
+      </div>
+    </nav>
+
+
   <div id="main"class="container">
-
-
-  <h3 id="errorMessage"></h3>
-
-  
-
   <p id="description"></p>
   <h1 id="location"></h1>
 
@@ -51,18 +59,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   <!-- Script Source Files -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -74,7 +70,7 @@
 <script>
 
 let key = '9592542d6951d5de319ab2c9f2260303';
-let currWeather = (getWeatherURL('sacramento'));
+let currWeather = (getWeatherURL('houston'));
 let descriptionDOM = document.getElementById('description');
 let locationDOM = document.getElementById('location');
 let tempDOM = document.getElementById('temp');
@@ -82,10 +78,29 @@ let feelsLikeDOM = document.getElementById('feelsLike');
 let windDOM = document.getElementById('wind');
 let humidityDOM = document.getElementById('humidity');
 
+const btnDOM = document.getElementById('searchBtn');
+const searchBoxDOM = document.getElementById('searchBox');
+const formDOM = document.getElementById('frm1');
+
+formDOM.addEventListener("submit", searchCity);
+
+
+function searchCity(e) {
+  e.preventDefault();
+  let city = searchBoxDOM.value;
+  getWeather(getWeatherURL(city));
+  formDOM.reset();
+}
+
 
   async function getWeather(weatherURL) {
     const response = await fetch(weatherURL);
     const JSON = await response.json();
+    if (JSON.cod >= 400 ){
+      console.log('error');
+      searchBoxDOM.classList.add("is-invalid");
+    } else {
+    searchBoxDOM.classList.remove("is-invalid")
     console.log(JSON)
     descriptionDOM.innerHTML = (JSON.weather[0].description)
     locationDOM.innerHTML = `${JSON.name}, ${JSON.sys.country}`
@@ -93,6 +108,7 @@ let humidityDOM = document.getElementById('humidity');
     feelsLikeDOM.innerHTML=`Feels like: ${JSON.main.feels_like.toFixed(0)}&deg C`;
     windDOM.innerHTML=`Wind: ${JSON.wind.speed} MPH`;
     humidityDOM.innerHTML = `Humidity: ${JSON.main.humidity} %`;
+    }
 
     }
 
