@@ -7,17 +7,15 @@ p {
   margin-bottom: 0.5em;
 }
 
-#description{
+#description {
   font-size: x-large;
 }
 
-body{
+body {
   color: white;
-  background-image: url('max-mckinnon-c9OCWLka764-unsplash.jpg');
+  background-image: url('img/max-mckinnon-c9OCWLka764-unsplash.jpg');
   background-size: cover;
-
 }
-
 
 /* .search {
   background-color: transparent;
